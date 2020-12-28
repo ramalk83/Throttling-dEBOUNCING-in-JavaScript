@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttling & Deboucing in JavaScript</title>
+</head>
+<body>
+    <input type="text" onkeyup="easyFunction()">
+    <button onclick="throttleFunction()">Submit</button>
+</body>
+<script>
+    let count=0;
+    const getData =()=>{
+        console.log("you pressed key",count++,"times")
+    }
+
+    const deBounce=function(fn,delay){
+        let timeoutId;
+
+        return function (...args){
+            if(timeoutId){
+                clearTimeout(timeoutId)
+            }
+
+           timeoutId= setTimeout (()=>{
+              getData(...args)
+            },delay)
+        }
+    }
+
+
+    //Throttle
+    const throttle =(fn,delay)=>{
+       let last=0;
+        return function(...args){
+            //getData(...args)
+         const now=new Date().getTime();
+         if(now-last<delay){
+             return;
+         }
+         last = now;
+         return getData(...args)
+        }
+    }
+
+    const easyFunction = deBounce (getData,300)
+    const throttleFunction = throttle (getData,2000)
+
+</script>
+</html>
