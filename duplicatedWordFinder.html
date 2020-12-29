@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="stringValue">big black bug bit a big black dog on his big black nose</p>
+    <h4 id="message">Repeated words</h4>
+    <h3 id="resultval"></h3>
+
+    <script  type="text/javascript">
+        //intalize couter
+    let str = 'big black bug bit a big black dog on his big black nose';
+    console.log(findMostRepeatedWord(str)); // Result: "do"
+
+    function findMostRepeatedWord(str) {
+    
+    //split the words
+    let words = str.match(/\w+/g);
+    console.log("original words"+words); 
+
+    let splitword = {};
+    let splitword1 = {};
+    //check in loop
+
+    for (let word of words) {
+        if (splitword[word]) {
+        splitword[word]++;
+        } else {
+        splitword[word] = 1;
+        }
+        if(splitword[word] > 1)
+        {
+        splitword1[word]=splitword[word]
+        }
+    }
+
+    document.getElementById("resultval").innerHTML=  Object.entries(splitword1)
+
+    console.log("Repeated words" ,splitword1); // { How: 1, do: 2, you: 1 }
+}
+        //Inner loop will compare the word selected by outer loop with rest of the words.
+        //if a match found, then increment the count 
+    </script>
+</body>
+</html>
